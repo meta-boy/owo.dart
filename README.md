@@ -1,22 +1,49 @@
-A library for Dart developers.
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+An API wrapper for https://whats-th.is/ written in Dart
 
-## Usage
-
-A simple usage example:
+Example: 
 
 ```dart
-import 'package:owo/owo.dart';
+import 'dart:io';
 
-main() {
-  var awesome = new Awesome();
+import 'package:owo/src/client.dart';
+
+void main(List<String> args) async {
+/// Initialize the client with your API key and optional 
+/// custom url (Visit https://whats-th.is/faq.html for more info about this)
+  var owo = OwOClient(
+      apiKey: 'YOUR API KEY',
+      customUrl: 'https://bad-me.me');
+/// l => left, which holds errors for every method
+/// r => right, which holds result for every method
+
+/// Uploading the file(s)
+  var resp =
+      await owo.upload(files: [File('/full/path/to/the/file.file_extension')]);
+  resp.fold((l) {
+    print(l.errorcode);
+  }, (r) {
+    r.files.forEach((element) {
+      print(owo.customUrl + element.url);
+    });
+  });
+  
+  /// Shortening any URL
+  var key = await owo.shorten(url: 'https://metaboy.info');
+  key.fold((l) => print(l.description), (r) => print(owo.customUrl + r));
+
+/// Getting all objects for the api key in context
+  var objects = await owo.getAllObjects();
+  objects.fold((l) => print(l.description), (r) => r.data.forEach((element) {
+    print(element.key);
+  }));
+  
+/// Getting an object with specified key
+var object = await owo.getObject(key: '2xEGFFw.png');
+  object.fold((l) => print(l.description), (r) => print(r.data.key));
+  
+/// Deleting an object with specfied key
+  var delete = await owo.deleteObject(key: '2xEGFFw.png');
+  delete.fold((l) => print(l.description), (r) => print(r.data.deleteReason));
 }
 ```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-[tracker]: http://example.com/issues/replaceme
