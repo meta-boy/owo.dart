@@ -1,6 +1,6 @@
 name: owo
-description: A starting point for Dart libraries or applications.
-version: 1.0.1
+description: API Wrapper for https://whats-th.is/ 
+version: 1.0.2
 homepage: https://owo.codes/source/owo.dart
 
 environment:

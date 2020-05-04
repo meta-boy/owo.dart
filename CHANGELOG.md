@@ -5,3 +5,7 @@
 ## 1.0.1
 
 - Initial functional version
+
+## 1.0.2
+
+- added documentation
