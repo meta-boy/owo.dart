@@ -1,6 +1,7 @@
 name: owo
 description: A starting point for Dart libraries or applications.
 version: 1.0.1
+homepage: https://owo.codes/source/owo.dart
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
