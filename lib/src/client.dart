@@ -1,18 +1,21 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:io';
 
+// Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-import 'package:owo/src/core/errors/exceptions.dart';
-import 'package:owo/src/core/errors/failures.dart';
-import 'package:owo/src/core/models/response_model.dart';
-import 'package:owo/src/utils/constants.dart';
-import 'package:owo/src/utils/functions.dart';
-
+// Project imports:
+import 'core/errors/exceptions.dart';
+import 'core/errors/failures.dart';
 import 'core/models/objects_model.dart';
+import 'core/models/response_model.dart';
+import 'utils/constants.dart';
+import 'utils/functions.dart';
 
+/// Client class
 class OwOClient {
   final String apiKey;
   final String customUrl;
@@ -64,6 +67,8 @@ class OwOClient {
   @override
   int get hashCode => apiKey.hashCode ^ customUrl.hashCode;
 
+  /// if statusCode for the response is 200, returns [OwOResponse]
+  /// else returns [OwOFailure]
   Future<Either<OwOFailure, OwOResponse>> upload(
       {@required List<File> files, bool associated = false}) async {
     var headers = {
@@ -95,6 +100,7 @@ class OwOClient {
     }
   }
 
+  /// Shorten the provided URL
   Future<Either<OwOFailure, String>> shorten(
       {@required String url, bool associated = false}) async {
     var headers = {
@@ -115,6 +121,8 @@ class OwOClient {
     }
   }
 
+  /// Getting an object with specified key
+
   Future<Either<OwOFailure, OwOObject>> getObject(
       {@required String key}) async {
     var headers = {
@@ -131,6 +139,8 @@ class OwOClient {
     }
   }
 
+  /// Deleting an object with specfied key
+
   Future<Either<OwOFailure, OwOObject>> deleteObject(
       {@required String key}) async {
     var headers = {
@@ -146,6 +156,8 @@ class OwOClient {
       return Left(owOFailureFromJson(response.body));
     }
   }
+
+  /// Get all (with constraints) objects for the [apiKey] in context.
 
   Future<Either<OwOFailure, OwOObjects>> getAllObjects(
       {int offset = 0, int limit = 100}) async {

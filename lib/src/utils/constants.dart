@@ -1,3 +1,4 @@
+/// Predefined constants
 const String domainsUrl =
     'https://raw.githubusercontent.com/whats-this/landing/master/public-cdn-domains.txt';
 const String baseUrl = 'https://api.awau.moe';

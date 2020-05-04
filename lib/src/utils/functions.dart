@@ -1,11 +1,16 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:meta/meta.dart';
+import 'package:http/http.dart' as http;
+
+// Project imports:
 import 'package:owo/src/core/errors/exceptions.dart';
 import 'package:owo/src/core/models/response_model.dart';
 import 'package:owo/src/utils/constants.dart';
-import 'package:http/http.dart' as http;
 
+/// Checks if the file does not exceed the maximum allowed size
 Future<bool> validFile({File file}) async {
   final fileLength = await file.length();
   if (fileLength > maxSize) {
@@ -16,6 +21,8 @@ Future<bool> validFile({File file}) async {
   return true;
 }
 
+/// Helper function to convert a raw [OwOResponse] object
+/// to have the [OwOResponse.files] formatted with the provided [url]
 Future<OwOResponse> responseWithUploadUrl(
     {@required OwOResponse response, String url}) async {
   var files = <FileElement>[];
@@ -39,6 +46,7 @@ Future<OwOResponse> responseWithUploadUrl(
   return owo;
 }
 
+/// Returns list of all available domains 
 Future<List<String>> getAvailableUrls() async {
   var response = await http.get(domainsUrl);
   var urls = <String>[];

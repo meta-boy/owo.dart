@@ -1,7 +1,4 @@
-// To parse this JSON data, do
-//
-//     final owOFailure = owOFailureFromJson(jsonString);
-
+// Dart imports:
 import 'dart:convert';
 
 OwOFailure owOFailureFromJson(String str) => OwOFailure.fromJson(json.decode(str));

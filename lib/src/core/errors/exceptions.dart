@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:meta/meta.dart';
 
+/// Exception class to deal with custom [File] related errors
 class FileException implements Exception {
   final String message;
 
@@ -8,6 +10,8 @@ class FileException implements Exception {
   @override
   String toString() => 'FileException(message: $message)';
 }
+
+/// Exception class to deal with custom url related errors
 
 class InvalidUrlException implements Exception {
   final String message;

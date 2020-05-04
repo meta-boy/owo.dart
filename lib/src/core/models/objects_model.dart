@@ -1,8 +1,7 @@
-// To parse this JSON data, do
-//
-//     final owOObject = owOObjectFromJson(jsonString);
-
+// Dart imports:
 import 'dart:convert';
+
+
 
 OwOObject owOObjectFromJson(String str) => OwOObject.fromJson(json.decode(str));
 
